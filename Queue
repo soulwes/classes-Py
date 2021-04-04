@@ -1,0 +1,20 @@
+class Queue:
+    def __init__(self):
+        self.headStack = Stack()
+        self.tailStack = Stack()
+    def enqueue(self, x):
+        self.tailStack.push(x)
+    def dequeue(self):
+        if self.headStack.empty():
+            while not self.tailStack.empty():
+                self.headStack.push(self.tailStack.pop()[0])
+        if self.tailStack.empty():
+            s = self.headStack.pop()
+            #print('?', s)
+            return s[1]
+        else:
+            k = self.tailStack.pop()
+            s = self.headStack.pop()
+            self.tailStack.push(k[0])
+            #print('!', k, s)
+            return min(k[1], s[1])
